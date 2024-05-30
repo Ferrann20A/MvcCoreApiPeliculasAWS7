@@ -7,6 +7,7 @@ namespace MvcCoreApiPeliculasAWS7.Controllers
     public class PeliculasController : Controller
     {
         private ServiceApiPeliculas service;
+        private ServiceStorageAWS serviceStorage;
 
         public PeliculasController(ServiceApiPeliculas service)
         {
@@ -46,8 +47,13 @@ namespace MvcCoreApiPeliculasAWS7.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Pelicula pelicula)
+        public async Task<IActionResult> Create(Pelicula pelicula, IFormFile file)
         {
+            pelicula.Foto = file.FileName;
+            using(Stream stream = file.OpenReadStream())
+            {
+                await this.serviceStorage.UploadFileAsync(file.FileName, stream);
+            }
             await this.service.CreatePeliculaAsync(pelicula);
             return RedirectToAction("Index");
         }
