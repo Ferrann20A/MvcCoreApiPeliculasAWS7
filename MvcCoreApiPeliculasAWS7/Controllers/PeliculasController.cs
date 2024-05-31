@@ -9,9 +9,10 @@ namespace MvcCoreApiPeliculasAWS7.Controllers
         private ServiceApiPeliculas service;
         private ServiceStorageAWS serviceStorage;
 
-        public PeliculasController(ServiceApiPeliculas service)
+        public PeliculasController(ServiceApiPeliculas service, ServiceStorageAWS serviceStorage)
         {
             this.service = service;
+            this.serviceStorage = serviceStorage;
         }
 
         public async Task<IActionResult> Index()
