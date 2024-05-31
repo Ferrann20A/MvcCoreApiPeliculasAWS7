@@ -1,7 +1,7 @@
 ﻿@model List<Pelicula>
 
 @{
-    string UrlBucket = configuration.GetValue<string>("AWS:S3BucketUrl");
+    string UrlBucket = keys.BucketUrl;
 }
 
 <h1>Peliculas AWS Api Gateway</h1>

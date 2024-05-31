@@ -1,5 +1,6 @@
 ﻿using Amazon.S3;
 using Amazon.S3.Model;
+using MvcCoreApiPeliculasAWS7.Models;
 
 namespace MvcCoreApiPeliculasAWS7.Services
 {
@@ -8,10 +9,10 @@ namespace MvcCoreApiPeliculasAWS7.Services
         private IAmazonS3 client;
         private string BucketName;
 
-        public ServiceStorageAWS(IConfiguration configuration, IAmazonS3 client)
+        public ServiceStorageAWS(KeysModel keys, IAmazonS3 client)
         {
             this.client = client;
-            this.BucketName = configuration.GetValue<string>("AWS:S3BucketName");
+            this.BucketName = keys.BucketName;
         }
 
         //METODO PARA SUBIR LAS IMAGENES DONDE NECESITAMOS EL NOMBRE
